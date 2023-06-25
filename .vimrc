@@ -1,85 +1,154 @@
-syntax on
+	syntax on
 
-let mapleader=','
+	let mapleader=' '
 
-filetype plugin on
-filetype indent on
+	filetype plugin on
+	filetype indent on
 
-set guifont=FiraCode_NF:h17
-set background=dark
-set clipboard+=unnamed
+	set guifont=Mononoki_Nerd_Font:h15
+	"set guifont=FiraCode_NF:h17
+	"set guifont=Iosevka:h13
+	"set guifont=8514oem:h22
+	"set guifont=MS_Gothic:h22
+	set background=dark
+	set clipboard+=unnamed
 
-set paste
-set go+=a
-set nobackup
-set nowritebackup
-set number
-set relativenumber
-set autoindent
-set smartindent
-set backspace=indent,eol,start
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set guioptions-=m
-set guioptions-=T
+	set paste
+	set go+=a
+	set nobackup
+	set nowritebackup
+	set number
+	set relativenumber
+	set autoindent
+	set smartindent
+	set backspace=indent,eol,start
+	set tabstop=4
+	set softtabstop=4
+	set shiftwidth=4
+	set guioptions-=m
+	set guioptions-=T
+	set guioptions=
 
-call plug#begin()
+	map <C-j> :bnext<CR>
+	map <C-k> :bprev<CR>
 
-"	Vim Easy Align
-Plug 'junegunn/vim-easy-align'  
+	call plug#begin()
 
-"	NERDTree
-Plug 'scrooloose/nerdtree' 
+	"	Vim Easy Align
+	Plug 'junegunn/vim-easy-align'  
 
-"	Neoclide-COC
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"	NERDTree
+	Plug 'scrooloose/nerdtree' 
 
-"	Theme
-Plug 'morhetz/gruvbox'
+	"	Neoclide-COC
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"	VimCloseTag
-Plug 'docunext/closetag.vim'
+	"	Theme
+	Plug 'morhetz/gruvbox'
+	Plug 'nordtheme/vim'
 
-" 	AutoCloseBrackets
-Plug 'chun-yang/auto-pairs'
+	"	VimCloseTag
+	Plug 'docunext/closetag.vim'
 
-call plug#end()
+	" 	AutoCloseBrackets
+	Plug 'chun-yang/auto-pairs'
 
-" 	Set ColorScheme
-colorscheme gruvbox
+	"	CTRLPVim - FuzzyFinder
+	Plug 'ctrlpvim/ctrlp.vim'
 
-"	Easy Align Configuration
-xmap ga <Plug>(EasyAlign)
+	"   FZF
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-"	NERDTree Configuration
-nnoremap <leader>n :NERDTreeFocus<CR> 
-nnoremap <C-n> :NERDTree<CR> 
-nnoremap <C-t> :NERDTreeToggle<CR>
+	"   Vim Airline
+	Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
-"	COC-Configuration
-" Run command to install code-completion
-" :CocInstall coc-clangd - c/c++
-" :CocInstall coc-python
-" :CocInstall coc-json
-" :CocInstall coc-tsserver - js/ts
-" :CocInstall coc-html
-" :CocInstall coc-css
+	call plug#end()
 
-set updatetime=300
-set signcolumn=yes
+	" 	Set ColorScheme
+	"colorscheme gruvbox
+	"colorscheme industry
+	"colorscheme desert
+	colorscheme nord
 
-function! CheckBackspace() abort   
-	let col = col('.') - 1   
-	return !col || getline('.')[col - 1]  =~# '\s' 
-endfunction
+	"	Easy Align Configuration
+	xmap ga <Plug>(EasyAlign)
 
-inoremap <silent><expr> <TAB>
-	  \ coc#pum#visible() ? coc#pum#next(1) :       
-	  \ CheckBackspace() ? "\<Tab>" :       
-	  \ coc#refresh() 
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+	"	NERDTree Configuration
+	nnoremap <leader>n :NERDTreeFocus<CR> 
+	nnoremap <C-n> :NERDTree<CR> 
+	nnoremap <C-t> :NERDTreeToggle<CR>
 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-							 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	"	COC-Configuration
+	"Run command to install code-completion
+	":CocInstall coc-clangd - c/c++
+	":CocInstall coc-python
+	":CocInstall coc-json
+	":CocInstall coc-tsserver - js/ts
+	":CocInstall coc-html
+	":CocInstall coc-css
 
+	set updatetime=300
+	set signcolumn=yes
+
+	function! CheckBackspace() abort   
+		let col = col('.') - 1   
+		return !col || getline('.')[col - 1]  =~# '\s' 
+	endfunction
+
+	inoremap <silent><expr> <TAB>
+		  \ coc#pum#visible() ? coc#pum#next(1) :       
+		  \ CheckBackspace() ? "\<Tab>" :       
+		  \ coc#refresh() 
+	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+	inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+								 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+	"let g:coc_start_at_startup = v:false
+
+	let g:fzf_action = {
+  		\ 'ctrl-t': 'tab split',
+  		\ 'ctrl-x': 'split',
+  		\ 'ctrl-v': 'vsplit' }
+
+	if has("unix")
+    function! FontSizePlus ()
+      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole + 1
+      let l:new_font_size = ' '.l:gf_size_whole
+      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+
+    function! FontSizeMinus ()
+      let l:gf_size_whole = matchstr(&guifont, '\( \)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole - 1
+      let l:new_font_size = ' '.l:gf_size_whole
+      let &guifont = substitute(&guifont, ' \d\+$', l:new_font_size, '')
+    endfunction
+else
+    function! FontSizePlus ()
+      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole + 1
+      let l:new_font_size = ':h'.l:gf_size_whole
+      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+    endfunction
+
+    function! FontSizeMinus ()
+      let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
+      let l:gf_size_whole = l:gf_size_whole - 1
+      let l:new_font_size = ':h'.l:gf_size_whole
+      let &guifont = substitute(&guifont, ':h\d\+$', l:new_font_size, '')
+    endfunction
+endif
+
+
+if has("gui_running")
+    nmap <C--> :call FontSizeMinus()<CR>
+    nmap <C-S-+> :call FontSizePlus()<CR>
+endif
+
+	" User Defined Shortcut
+	nnoremap <F1> :!make<CR>
+	nnoremap <F2> :!build.bat<CR>
+	nnoremap <C-e> :FZF<CR>
