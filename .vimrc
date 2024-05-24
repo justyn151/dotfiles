@@ -1,15 +1,22 @@
-syntax on
+" syntax on
+syntax off
+set t_Co=0
 
 let mapleader=' '
 
-filetype plugin on
-filetype indent on
+" filetype plugin on
+" filetype indent on
+filetype off
 
-set guifont=Mononoki_Nerd_Font:h15
+"set guifont=Mononoki_Nerd_Font:h15
 "set guifont=FiraCode_NF:h17
+"set guifont=Hack:h13
+"set guifont=Consolas:h12"
 "set guifont=Iosevka:h13
+set guifont=Monaspace_Radon:h12
 "set guifont=8514oem:h22
 "set guifont=MS_Gothic:h22
+"set guifont=DinaRemasterII
 set background=dark
 set clipboard+=unnamed
 
@@ -40,12 +47,20 @@ Plug 'junegunn/vim-easy-align'
 "	NERDTree
 Plug 'scrooloose/nerdtree' 
 
+" 	Vaxe
+Plug 'jdonaldson/vaxe'
+
 "	Neoclide-COC
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Addition Language Support
+Plug 'ziglang/zig.vim'
 
 "	Theme
 Plug 'morhetz/gruvbox'
 Plug 'nordtheme/vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'blazkowolf/gruber-darker.nvim'
 
 "	VimCloseTag
 Plug 'docunext/closetag.vim'
@@ -62,14 +77,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "   Vim Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 call plug#end()
 
 " 	Set ColorScheme
+"colorscheme codedark
 "colorscheme gruvbox
 "colorscheme industry
-"colorscheme desert
-colorscheme nord
+"colorscheme nord
 
 "	Easy Align Configuration
 xmap ga <Plug>(EasyAlign)
@@ -106,6 +120,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 							 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "let g:coc_start_at_startup = v:false
+let g:zig_fmt_autosave = 0
 
 let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
@@ -152,3 +167,6 @@ endif
 nnoremap <F1> :!make<CR>
 nnoremap <F2> :!build.bat<CR>
 nnoremap <C-e> :FZF<CR>
+
+nnoremap gr gd[{V%::s///gc<left><left><left>
+n
