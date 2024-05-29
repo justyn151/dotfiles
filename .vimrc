@@ -1,23 +1,24 @@
-" syntax on
-syntax off
-set t_Co=0
+syntax on
+"syntax off
 
 let mapleader=' '
 
-" filetype plugin on
-" filetype indent on
-filetype off
+filetype plugin on
+filetype indent on
+" filetype off
 
 "set guifont=Mononoki_Nerd_Font:h15
 "set guifont=FiraCode_NF:h17
 "set guifont=Hack:h13
 "set guifont=Consolas:h12"
 "set guifont=Iosevka:h13
-set guifont=Monaspace_Radon:h12
+"set guifont=Monaspace_Radon:h12
+"set guifont=Liberation_Mono
+set guifont=DejaVu_Sans_Mono:h9
 "set guifont=8514oem:h22
 "set guifont=MS_Gothic:h22
 "set guifont=DinaRemasterII
-set background=dark
+"set background=dark
 set clipboard+=unnamed
 
 set paste
@@ -61,6 +62,7 @@ Plug 'morhetz/gruvbox'
 Plug 'nordtheme/vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'blazkowolf/gruber-darker.nvim'
+Plug 'CreaturePhil/vim-handmade-hero'
 
 "	VimCloseTag
 Plug 'docunext/closetag.vim'
@@ -84,6 +86,7 @@ call plug#end()
 "colorscheme gruvbox
 "colorscheme industry
 "colorscheme nord
+colorscheme handmade-hero
 
 "	Easy Align Configuration
 xmap ga <Plug>(EasyAlign)
@@ -169,4 +172,4 @@ nnoremap <F2> :!build.bat<CR>
 nnoremap <C-e> :FZF<CR>
 
 nnoremap gr gd[{V%::s///gc<left><left><left>
-n
+nnoremap gR gD:%s///gc<left><left><left>
